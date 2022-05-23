@@ -1,0 +1,79 @@
+#Program to get current weather conditions of requested city
+
+#importing required modules for code
+#import requests
+
+#My API key
+#api_key = "588109722171f2bef5629127765a05f5"
+
+#OpenWeather base URL
+#url = "http://api.openweathermap.org/geo/1.0/direct?q="
+
+#This is the full URL for OpenWeather
+#final_url = url + "appid=" + api_key + "&q=" + location
+
+#Requesting response from OpenWeather
+#response = requests.get(final_url)
+
+#JSON respones from OpenWeather
+#open_weather_response = response.json()
+
+#Setting up variables
+##location_main = open_weather_response["main"]
+##location_wind = open_weather_response["wind"]
+##location_temp = location_main["temp"]
+##location_feels_like = location_main["feels_like"]
+##cloud_coverage = location_main["description"]
+##humidity = location_main["humidity"]
+##wind_speed = location_wind["speed"]
+##wind_direction = location_wind["deg"]
+##wind_gusts = location_wind["gust"]
+##new_search = "Y"
+
+#This section of variables is to test code and will get deleted
+location_main = "test1"
+location_wind = "test1"
+location_temp = "test1"
+location_feels_like = "test1"
+cloud_coverage = "test1"
+humidity = "test1"
+wind_speed = "test1"
+wind_direction = "test1"
+wind_gusts = "test1"
+new_search = "Y"
+
+#Intro function
+def intro():
+  print()
+  print("Hello thank you for using this service to find out the weather.")
+  print()
+  
+#Main function where data will be displayed
+def main():
+  print()
+  print("Location = " + location)
+  print("Temperature = " + location_temp)
+  print("Feels Like Temperature = " + location_feels_like)
+  print("Cloud Coverage = " + cloud_coverage)
+  print("Humidity = " + humidity)
+  print("Wind Speed = " + wind_speed)
+  print("Wind Direction = " + wind_direction)
+  print("Wind Gusts = " + wind_gusts)
+  print()
+  
+#while loop so user can continue to make requests until "N" or "n" is stated
+while new_search == "Y" or new_search == "y":
+  intro()
+  print("Please enter the location that you would like to see the weather for")
+  location = input("City name or zipcode: ")
+  #This try and except will make sure that the city is retrivable from OpenWeather
+  try:
+    #The code below will be for the final submittal
+    #open_weather_response["cod"] != "404"
+    main()
+  except ValueError:
+    print("City not found.")
+  #Requesting the user if they want to check another city, if not program will exit.
+  new_search = input("Would you like to check another city Y/N: ")
+  if new_search == "N" or new_search == "n":
+    print("Thank you for using this service.") 
