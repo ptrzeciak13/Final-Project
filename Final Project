@@ -1,0 +1,59 @@
+#Program to get current weather conditions of requested city
+
+#importing required modules for code
+import requests, json
+
+#My API key = "588109722171f2bef5629127765a05f5"
+
+#Variable Setup
+new_search = "Y"
+
+#Intro function
+def intro():
+  print()
+  print("Hello thank you for using this service to find out the weather.")
+  print()
+  
+#Main function where data will be displayed
+def main():
+  print()
+  print("Location = " + location)
+  print("Temperature = " + location_temp)
+  print("Feels Like Temperature = " + location_feels_like)
+  print("Humidity = " + humidity)
+  print("Wind Speed = " + wind_speed)
+  print("Wind Direction = " + wind_direction)
+  print()
+  
+#while loop so user can continue to make requests until "N" or "n" is stated
+while new_search == "Y" or new_search == "y":
+    intro()
+    print("Please enter the location that you would like to see the weather for")
+    location = input("City name, Two letter country code (example - Clermont, US): ")
+
+    #OpenWeather base URL
+    url = 'https://api.openweathermap.org/data/2.5/weather?q={}&appid=588109722171f2bef5629127765a05f5&units=imperial'.format(location)
+
+    #Requesting response from OpenWeather
+    response = requests.get(url)
+
+    #JSON respones from OpenWeather
+    open_weather_response = response.json()
+
+    #Setting up variables
+    location_main = open_weather_response["main"]
+    location_wind = open_weather_response["wind"]
+    location_temp = str(location_main["temp"])
+    location_feels_like = str(location_main["feels_like"])
+    humidity = str(location_main["humidity"])
+    wind_speed = str(location_wind["speed"])
+    wind_direction = str(location_wind["deg"])
+    #This try and except will make sure that the city is retrivable from OpenWeather
+    if open_weather_response["cod"] != "404":
+        main()
+    else:
+        print("City not found.")
+  #Requesting the user if they want to check another city, if not program will exit.
+    new_search = input("Would you like to check another city Y/N: ")
+    if new_search == "N" or new_search == "n":
+        print("Thank you for using this service.") 
